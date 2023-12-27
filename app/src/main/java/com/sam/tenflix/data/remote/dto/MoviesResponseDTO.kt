@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
 
 @Serializable
-data class NowPlayingMoviesDTO(
+data class MoviesResponseDTO(
     @SerialName("dates")
     var dates: DatesDTO? = null,
     @SerialName("page")
@@ -51,19 +51,6 @@ data class MoviesDTO(
     var voteCount: Int? = null
 )
 
-fun MoviesDTO.toMovies(): MoviesModel {
-    return MoviesModel(
-        adult = adult,
-        genreIds = genreIds,
-        id = id,
-        originalLanguage = originalLanguage,
-        originalTitle = originalTitle,
-        overview = overview,
-        posterPath = posterPath,
-        releaseDate = releaseDate,
-        title = title,
-    )
-}
 
 @Serializable
 data class DatesDTO(

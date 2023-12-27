@@ -11,16 +11,17 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
-class NowPlayingMoviesUseCase @Inject constructor(
+class TopRatedMoviesUseCase @Inject constructor(
     private val moviesRepository: MoviesRepository
 ) {
+
 
     operator fun invoke(): Flow<NetworkResource<List<MoviesModel>>> = flow {
         emit(NetworkResource.Loading())
 
         try {
 
-            val movies = moviesRepository.getNowPlayingMovies().results.map { it.toMovies() }
+            val movies = moviesRepository.getTopRatedMovies().results.map { it.toMovies() }
             emit(NetworkResource.Success(movies))
 
         } catch (e: Exception) {

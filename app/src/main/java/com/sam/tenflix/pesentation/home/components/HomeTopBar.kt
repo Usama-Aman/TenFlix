@@ -1,8 +1,7 @@
-package com.sam.tenflix.pesentation.now_playing.components
+package com.sam.tenflix.pesentation.home.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -32,8 +31,7 @@ fun HomeTopBar(
 
         Icon(
             modifier = Modifier
-                .size(40.dp)
-                .padding(5.dp),
+                .size(40.dp),
             painter = painterResource(id = R.drawable.app_logo),
             tint = AppRed,
             contentDescription = null

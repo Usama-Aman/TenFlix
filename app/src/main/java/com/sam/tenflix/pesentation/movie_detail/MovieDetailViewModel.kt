@@ -1,10 +1,12 @@
-package com.sam.tenflix.pesentation.now_playing
+package com.sam.tenflix.pesentation.movie_detail
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sam.tenflix.common.NetworkResource
-import com.sam.tenflix.domain.model.MoviesModel
-import com.sam.tenflix.domain.use_case.NowPlayingMoviesUseCase
+import com.sam.tenflix.domain.model.MovieDetail
+import com.sam.tenflix.domain.use_case.MovieDetailUseCase
+import com.sam.tenflix.pesentation.navigation.MOVIE_ID
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.launchIn
@@ -13,45 +15,52 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeScreenViewModel @Inject constructor(
-    private val nowPlayingMoviesUseCase: NowPlayingMoviesUseCase
+class MovieDetailViewModel @Inject constructor(
+    savedStateHandle: SavedStateHandle,
+    private val movieDetailUseCase: MovieDetailUseCase
 ) : ViewModel() {
 
-    data class NowPlayingState(
-        var movies: List<MoviesModel> = listOf(),
+    data class MovieDetailUIState(
         var isLoading: Boolean = false,
+        var movieDetail: MovieDetail = MovieDetail(),
         var errorMessage: String = ""
     )
 
-    var nowPlayingState = MutableStateFlow(NowPlayingState())
+    private val movieId: Int = checkNotNull(savedStateHandle[MOVIE_ID])
+
+    var movieDetailState = MutableStateFlow(MovieDetailUIState())
         private set
 
+
     init {
-        getNowPlayingMovies()
+        getMovieDetail()
     }
 
-    private fun getNowPlayingMovies() {
-        nowPlayingMoviesUseCase().onEach {
+
+    private fun getMovieDetail() {
+        movieDetailUseCase(movieId = movieId).onEach {
             when (it) {
                 is NetworkResource.Success -> {
                     if (it.data != null)
-                        nowPlayingState.update { state ->
+                        movieDetailState.update { state ->
                             state.copy(
-                                movies = it.data
+                                movieDetail = it.data,
+                                isLoading = false
                             )
                         }
                 }
 
                 is NetworkResource.Error -> {
-                    nowPlayingState.update { state ->
+                    movieDetailState.update { state ->
                         state.copy(
-                            errorMessage = it.error ?: ""
+                            errorMessage = it.error ?: "",
+                            isLoading = false
                         )
                     }
                 }
 
                 is NetworkResource.Loading -> {
-                    nowPlayingState.update { state ->
+                    movieDetailState.update { state ->
                         state.copy(
                             isLoading = true
                         )
@@ -60,6 +69,4 @@ class HomeScreenViewModel @Inject constructor(
             }
         }.launchIn(viewModelScope)
     }
-
-
 }

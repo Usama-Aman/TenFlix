@@ -41,7 +41,4 @@ class NetworkModule {
     @Singleton
     fun provideMoviesRepository(httpClient: HttpClient): MoviesRepository = MoviesRepositoryImpl(httpClient)
 
-    @Provides
-    @Singleton
-    fun providesNowPlayingUseCase(moviesRepository: MoviesRepository) = NowPlayingMoviesUseCase(moviesRepository)
 }
