@@ -1,6 +1,6 @@
 package com.sam.tenflix.data.remote.dto
 
-import com.sam.tenflix.domain.model.NowPlayingMovies
+import com.sam.tenflix.domain.model.MoviesModel
 import kotlinx.serialization.Serializable
 
 import kotlinx.serialization.SerialName
@@ -49,12 +49,10 @@ data class MoviesDTO(
     var voteAverage: Double? = null,
     @SerialName("vote_count")
     var voteCount: Int? = null
-) {
-    val fullPosterPath = " $posterPath"
-}
+)
 
-fun MoviesDTO.toMovies(): NowPlayingMovies {
-    return NowPlayingMovies(
+fun MoviesDTO.toMovies(): MoviesModel {
+    return MoviesModel(
         adult = adult,
         genreIds = genreIds,
         id = id,

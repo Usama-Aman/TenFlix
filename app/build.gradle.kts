@@ -130,6 +130,13 @@ dependencies {
     // Compose Navigation
     val navVersion = "2.7.6"
     implementation("androidx.navigation:navigation-compose:$navVersion")
+
+    // Compose Material
+    implementation("androidx.compose.material:material:1.5.4")
+
+    // Coil
+    implementation("io.coil-kt:coil-compose:2.5.0")
+
 }
 
 // Allow references to generated code
