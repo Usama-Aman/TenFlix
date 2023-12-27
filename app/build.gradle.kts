@@ -122,6 +122,14 @@ dependencies {
 
     // Kotlin Serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2")
+
+    // For collection state with lifecycles
+    implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
+
+
+    // Compose Navigation
+    val navVersion = "2.7.6"
+    implementation("androidx.navigation:navigation-compose:$navVersion")
 }
 
 // Allow references to generated code
