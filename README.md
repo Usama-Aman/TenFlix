@@ -5,6 +5,9 @@
 Texflix is an ongoing project as a clone of Netflix. It is built in Compose and follows Clean architecture and MVVM, use case pattern. 
 It uses the free available API of [themoviedb](https://www.themoviedb.org/)
 
+> **Note**
+> It is still a work in progress
+
 ### Supported Platforms: 
 * Android
 
