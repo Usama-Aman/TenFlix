@@ -36,6 +36,12 @@ android {
             name = "API_KEY",
             value = apiKey
         )
+        val token = properties.getProperty("TOKEN") ?: ""
+        buildConfigField(
+            type = "String",
+            name = "TOKEN",
+            value = token
+        )
     }
 
     buildTypes {
