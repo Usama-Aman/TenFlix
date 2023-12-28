@@ -25,7 +25,7 @@ android {
         }
 
         //load the values from .properties file
-        val keystoreFile = project.rootProject.file("api_key.properties")
+        val keystoreFile = project.rootProject.file("local.properties")
         val properties = Properties()
         properties.load(keystoreFile.inputStream())
 
